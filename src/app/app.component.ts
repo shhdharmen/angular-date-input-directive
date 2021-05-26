@@ -1,5 +1,7 @@
+// src/app/app.component.ts
+
 import { Component } from '@angular/core';
-import { FormControl, FormGroup, Validators } from '@angular/forms';
+import { FormControl, FormGroup } from '@angular/forms';
 
 @Component({
   selector: 'app-root',
@@ -7,7 +9,7 @@ import { FormControl, FormGroup, Validators } from '@angular/forms';
 })
 export class AppComponent {
   fg = new FormGroup({
-    date: new FormControl(''),
+    date: new FormControl(new Date().toISOString()),
   });
 
   get date() {
