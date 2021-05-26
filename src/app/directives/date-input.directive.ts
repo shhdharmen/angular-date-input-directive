@@ -1,3 +1,4 @@
+import { formatDate } from '@angular/common';
 import { Directive, ElementRef, HostListener, Renderer2 } from '@angular/core';
 import {
   AbstractControl,
@@ -33,14 +34,7 @@ export class DateInputDirective implements ControlValueAccessor, Validator {
   onInput = (_: any) => {};
 
   writeValue(dateISOString: string): void {
-    const date = new Date(dateISOString);
-
-    const UIValue =
-      date.getFullYear() +
-      '-' +
-      this.getTwoDigits(date.getMonth() + 1) +
-      '-' +
-      this.getTwoDigits(date.getDate());
+    const UIValue = formatDate(dateISOString, 'YYYY-MM-dd', 'en-IN');
 
     this._renderer.setAttribute(
       this._elementRef.nativeElement,
@@ -70,8 +64,8 @@ export class DateInputDirective implements ControlValueAccessor, Validator {
 
   getDate(value: number) {
     if (value) {
-      const dateObj = new Date(value);
-      return this.isValidDate(dateObj) ? dateObj : { toISOString: () => null };
+      const date = new Date(value);
+      return this.isValidDate(date) ? date : { toISOString: () => null };
     }
     return { toISOString: () => null };
   }
