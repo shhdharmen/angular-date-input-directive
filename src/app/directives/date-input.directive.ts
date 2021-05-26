@@ -54,10 +54,6 @@ export class DateInputDirective implements ControlValueAccessor, Validator {
     return control.value && this.isValidDate(date) ? null : { date: true };
   }
 
-  getTwoDigits(value: string | number): string {
-    return ('0' + value).slice(-2);
-  }
-
   isValidDate(d: Date | number | null) {
     return d instanceof Date && !isNaN(d as unknown as number);
   }
